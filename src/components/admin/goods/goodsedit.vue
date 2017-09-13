@@ -75,7 +75,9 @@
                                 </el-form-item>
                            </el-col>
                            <el-col :span="9">
-                                 <el-form-item label="上传附件">
+                                <el-form-item label="上传附件">
+                                <EasyScrollbar :barOption="opt">
+                                <div  id="wrapper" style="max-height: 200px;">                                
                                     <el-upload
                                         class="upload-demo"
                                         :action="uploadfileapi"                           
@@ -85,8 +87,11 @@
                                         list-type="picture">
                                         <el-button size="small" type="primary">点击上传</el-button>
                                         <!--<div slot="tip" class="el-upload__tip">不超过100MB</div>-->
-                                    </el-upload>
-                                </el-form-item>
+                                    </el-upload>                                    
+                               
+                                    </div>
+                                 </EasyScrollbar>
+                                  </el-form-item>
                            </el-col>
                        </el-row>
                          <el-row>
@@ -155,7 +160,17 @@
                 uploadfileapi:'',
                 wcstatus:true ,//上传文件带cookie
                 //imgList:[{name:'food.jpg',url:'http://127.0.0.1:8899/imgs/hAEnUEj2I827aDDHJYL_Ugpd.jpeg'}], //图片列表 
-                  
+                opt:{  //滚动条组件样式
+                barColor:"#d0d0d0",   //滚动条颜色
+                barWidth:10,           //滚动条宽度
+                railColor:"#eee",     //导轨颜色
+                barMarginRight:0,     //垂直滚动条距离整个容器右侧距离单位（px）
+                barMaginBottom:0,     //水平滚动条距离底部距离单位（px)
+                barOpacityMin:1,      //滚动条非激活状态下的透明度
+                zIndex:"auto",        //滚动条z-Index
+                autohidemode:false,     //自动隐藏模式
+                horizrailenabled:false,//是否显示水平滚动条
+                },
                 editorOption:{}, //富文本编辑器配置   
                 form: {
                     title: '',   //标题

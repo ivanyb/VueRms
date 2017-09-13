@@ -6,8 +6,11 @@ module.exports={
   	path : __dirname+'/dist',  // 注意：webpack1.14.0 要求这个路径是一个绝对路径
   	filename:'build.js'
   },
+  resolve: {
+   extensions: ['.js', '.vue']
+  },
   module:{
-  	loaders:[
+  	rules:[
   		{
   			test: /\.css$/,  //打包 .css文件
   			loader:'style-loader!css-loader'

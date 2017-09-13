@@ -29,7 +29,7 @@
         <!--3.0 列表区域-->
         <el-row>
             <el-col :span="24">
-            <el-table ref="mtable" :data="tableData3" border tooltip-effect="dark"  height="450"
+            <el-table ref="mtable" :data="tableData3" border tooltip-effect="dark"  height="400"
              style="width: 100%" @selection-change="handleSelectionChange"
              v-loading="loading"
              element-loading-text="拼命加载中">

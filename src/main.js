@@ -12,13 +12,14 @@ axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded
 axios.defaults.withCredentials=true;
 
 Vue.prototype.$http = axios;
-
-
 // 导入elementui
 import ElementUI from 'element-ui';
 import '../statics/theme_rms/index.css';
-Vue.use(ElementUI);
+Vue.use(ElementUI); 
 
+// 美观的滚动条组件
+import EasyScroll from 'easyscroll';
+Vue.use(EasyScroll);
 
 // 2.0 导入App.vue的vue对象
 import App from './App.vue'; 

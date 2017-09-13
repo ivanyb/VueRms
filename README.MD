@@ -17,7 +17,86 @@
 - v7 1、完成文章新增，编辑，全选，删除，列表功能，2、还未实现列表中的搜索功能和轮播，置顶，推荐功能
 - v9 1、实现分类的编辑功能   2、集成菜单中的所有分类连接
 - v10 实现商品列表分页展示数据 ，编辑商品，新增商品
+- v11 在商品新增和编辑页面中利用easyscroll实现美观的滚动条 
 
+    ```
+    easyscroll使用方法：
+    注意：在此项目中，需要设定EasyScrollbar 中的div的样式，设置成height:200px滚动条进入页面时自动隐藏
+    设置为max-height:200px进入页面自动显示滚动条
+
+    1、项目render函数采用jsx语法完成，项目中需要安装jsx插件，具体请访问 https://github.com/vuejs/babel-plugin-transform-vue-jsx#usage
+    步骤：
+    cnpm install  babel-plugin-syntax-jsx, babel-plugin-transform-vue-jsx,        babel-helper-vue-jsx-merge-props, babel-preset-es2015 --save-dev
+
+    在 .babelrc中增加如下配置：
+
+    {
+    "presets": ["es2015"],
+    "plugins": ["transform-vue-jsx"]
+    }
+
+    2、在webpack.config.js文件中的output节点后面增加
+     resolve: {
+        extensions: ['.js', '.vue']
+        }
+
+    3、使用步骤参考：https://garveyzuo.github.io/easyscroll.github.io/#/ 
+    安装
+    运行：
+    cnpm i easyscroll --save 
+    在main.js中使用：
+    import EasyScroll from 'easyscroll';
+    Vue.use(EasyScroll);
+
+    简单应用：
+    <el-row style="padding:16px 16px;">
+    <el-col :span="24">
+      <EasyScrollbar>
+        <div  id="wrapper" style="height: 300px;">
+          <div style="height: 500px;background-color: greenyellow;text-align: center;">
+            最简单的应用
+          </div>
+        </div>
+      </EasyScrollbar>
+    </el-col>
+  </el-row>
+
+    说明：
+    安装完easyscroll之后，在组件中直接引用EasyScrollbar组件就行，产生滚动条的内容作为EasyScroll的$slot插入到滚动条组件中，注意插入到滚动条组件中内容 需要一个外层的包裹，即上面代码中的#wrapper div，其内部才是真正动态的内容。
+
+    配置参数：
+    滚动条的主要参数：
+                 opt:{
+                    barColor:"#959595",   //滚动条颜色
+                    barWidth:6,           //滚动条宽度
+                    railColor:"#eee",     //导轨颜色
+                    barMarginRight:0,     //垂直滚动条距离整个容器右侧距离单位（px）
+                    barMaginBottom:0,     //水平滚动条距离底部距离单位（px)
+                    barOpacityMin:0.3,      //滚动条非激活状态下的透明度
+                    zIndex:"auto",        //滚动条z-Index
+                    autohidemode:true,     //自动隐藏模式
+                    horizrailenabled:true,//是否显示水平滚动条
+                    }
+     <EasyScrollbar :barOption="opt">
+        <div>
+            <div>
+            内容
+            </div>
+        </div>
+        </EasyScrollbar>
+        <script>
+        data{
+            return{
+            data(){
+                opt:{
+                    barColor:"red"
+                }
+            }
+            }
+        }
+        </script>    
+
+    ```
 
 ## 三、填坑
 
