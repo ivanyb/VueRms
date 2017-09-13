@@ -212,7 +212,7 @@
             onSubmit(formName) {
                  this.$refs[formName].validate((valid) => {
                 if (valid) {
-                    var url = this.dataAPI+'/goods/edit/'+this.artid;
+                    var url = '/admin/goods/edit/'+this.artid;
                     this.$http.post(url,this.form)
                     .then((res)=> {
                         if(res.data.status == 1){
@@ -271,12 +271,12 @@
                 console.log('editor ready!', editor)
             },
             getcategorylist(){
-                var url = this.dataAPI+'/article/getcategorylist/'+this.tablename;
+                var url = '/admin/article/getcategorylist/'+this.tablename;
                 this.$http.get(url).then(res=>{
                   this.categorylist = res.data.message;
 
                     // 获取编辑老数据对象
-                    var artUrl = this.dataAPI+'/goods/getgoodsmodel/'+this.artid;
+                    var artUrl = '/admin/goods/getgoodsmodel/'+this.artid;
                     this.$http.get(artUrl).then(res=>{                      
                         this.form = res.data.message;
                         console.log(this.form);

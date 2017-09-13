@@ -77,14 +77,14 @@
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
                         //验证通过以后，触发请求                                      
-                        this.$http.post('/account/login'
+                        this.$http.post('/admin/account/login'
                             , 'uname='+this.ruleForm2.uname+'&upwd='+this.ruleForm2.upwd)
                             .then((res)=> {
                                 this.$notify({title: '成功',message: res.data.uname,duration:300,
                                  type: 'success',onClose:()=>{
                                      //修改body背景色
                                       document.querySelector('#body').style = "background:#ffffff";
-                                     this.$router.push({name:'artlist'});
+                                     this.$router.push({name:'questionarticlelist'});
                                     } });
 
                             }).catch((err)=> {

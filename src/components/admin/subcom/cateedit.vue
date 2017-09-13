@@ -116,7 +116,7 @@
             onSubmit(formName) {
                  this.$refs[formName].validate((valid) => {
                 if (valid) {
-                    var url = this.dataAPI+'/category/edit/'+this.categoryid;
+                    var url = '/admin/category/edit/'+this.categoryid;
                     this.$http.post(url,this.form)
                     .then((res)=> {
                         if(res.data.status == 1){
@@ -144,8 +144,8 @@
                 this.$router.go(-1);
             },
             getcategorylist(){              
-                var url = this.dataAPI+'/article/getcategorylist/'+this.tablename;
-                var getmodelApi = this.dataAPI+'/category/getcategorymodel/'+this.categoryid;
+                var url = '/admin/article/getcategorylist/'+this.tablename;
+                var getmodelApi = '/admin/category/getcategorymodel/'+this.categoryid;
                 this.$http.get(url).then(res=>{
                     if(res.data.status == 1){
                             this.$notify.error({ title: '异常',message: res.data.message}); 

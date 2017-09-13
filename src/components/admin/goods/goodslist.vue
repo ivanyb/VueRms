@@ -22,7 +22,6 @@
                 <el-col :span="4">
                     <el-input placeholder="请输入搜索内容" icon="search" v-model="searchval" :on-icon-click="handleIconClick">
                     </el-input>
-
                 </el-col>
             </el-row>
         </div>
@@ -123,14 +122,20 @@
         methods: {
             getlist(){
                 this.loading = true;
-                this.$http.get(`/goods/getlist?pageIndex=${this.pageIndex}&pageSize=${this.pageSize}`)
+                this.$http.get(`/admin/goods/getlist?pageIndex=${this.pageIndex}&pageSize=${this.pageSize}`)
                 .then(res=>{
-                    this.loading = false;
+                   
                     this.tableData3 = res.data.message;
                     this.totalCount = res.data.totalcount;
+                    setTimeout(()=> {
+                         this.loading = false;
+                    }, 500);
+                   
                 })
                 .catch(err=>{
-                    this.loading = false;
+                         setTimeout(()=> {
+                         this.loading = false;
+                    }, 500);
                     this.$notify.error({title:'错误',message:err.message});
                 });
             },
@@ -202,9 +207,8 @@
                     }
                     ids+=this.selectedlist[i].id+splitChar;
                 }
-
-                let url = this.dataAPI+'/goods/del/'+ids;
-                this.$http.get(url).then(res=>{
+               
+                this.$http.get('/admin/goods/del/'+ids).then(res=>{
                     if(res.data.status ==1){
                         this.$message({
                             type: 'info',

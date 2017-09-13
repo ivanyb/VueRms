@@ -168,7 +168,7 @@
             onSubmit(formName) {
                  this.$refs[formName].validate((valid) => {
                 if (valid) {
-                    var url = this.dataAPI+'/article/add/'+this.tablename;
+                    var url = '/admin/article/add/'+this.tablename;
                     this.$http.post(url,this.form)
                     .then((res)=> {
                         if(res.data.status == 1){
@@ -227,7 +227,7 @@
                 console.log('editor ready!', editor)
             },
             getcategorylist(){
-                var url = this.dataAPI+'/article/getcategorylist/'+this.tablename;
+                var url ='/admin/article/getcategorylist/'+this.tablename;
                 this.$http.get(url).then(res=>{
                   this.categorylist = res.data.message;
                 });

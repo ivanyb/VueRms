@@ -113,14 +113,18 @@
         methods: {
             getlist(){
                 this.loading = true;
-                this.$http.get(`/article/getlist/${this.tablename}?pageIndex=${this.pageIndex}&pageSize=${this.pageSize}`)
+                this.$http.get(`/admin/article/getlist/${this.tablename}?pageIndex=${this.pageIndex}&pageSize=${this.pageSize}`)
                 .then(res=>{
-                    this.loading = false;
+                   setTimeout(()=> {
+                         this.loading = false;
+                    }, 500);
                     this.tableData3 = res.data.message;
                     this.totalCount = res.data.totalcount;
                 })
                 .catch(err=>{
-                    this.loading = false;
+                   setTimeout(()=> {
+                         this.loading = false;
+                    }, 500);
                     this.$notify.error({title:'错误',message:err.message});
                 });
             },
@@ -193,7 +197,7 @@
                     ids+=this.selectedlist[i].id+splitChar;
                 }
 
-                let url = this.dataAPI+'/article/del/'+this.tablename+'/'+ids;
+                let url = '/admin/article/del/'+this.tablename+'/'+ids;
                 this.$http.get(url).then(res=>{
                     if(res.data.status ==1){
                         this.$message({

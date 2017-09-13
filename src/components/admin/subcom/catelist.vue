@@ -79,12 +79,16 @@
             // 获取分类数据
             getlist(){
                 this.loading =true;
-                var url = this.dataAPI +'/category/getlist/'+this.tablename;
+                var url = '/admin/category/getlist/'+this.tablename;
                 this.$http.get(url).then(res=>{
-                    this.loading =false;
+                   setTimeout(()=> {
+                         this.loading = false;
+                    }, 500);
                    this.tableData3 = res.data.message;
                 }).then(err=>{
-                    this.loading =false;
+                   setTimeout(()=> {
+                         this.loading = false;
+                    }, 500);
                 });
             },
             handleSelectionChange(val) {

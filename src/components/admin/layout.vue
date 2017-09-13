@@ -1,5 +1,9 @@
 <template>
     <div class="tmpl">
+        <button @click="setsession">写session</button>
+        <button @click="getsession1">读取session</button>
+        <button @click="setsession1">goods写session</button>
+        <button @click="getsession">goods读取session</button>
         <!--elementUI的布局组件实现布局-->
         <el-row>
             <!--左边菜单-->
@@ -94,7 +98,7 @@
                                 <el-dropdown-menu slot="dropdown">
                                     <el-dropdown-item><a href="#">预览网站</a></el-dropdown-item>
                                     <el-dropdown-item><a href="#">修改密码</a></el-dropdown-item>
-                                    <el-dropdown-item><a href="#">注销登录</a></el-dropdown-item>                                  
+                                    <el-dropdown-item><router-link to="/admin/login">注销登录</router-link></el-dropdown-item>                                  
                                 </el-dropdown-menu>
                             </el-dropdown>
                         </div>
@@ -122,6 +126,30 @@
             };
         },
         methods: {
+            setsession(){
+                this.$http.post('/admin/account/login','uname=admin&upwd=123456')
+                .then(res=>{
+                    console.log(res.data);
+                });
+            },
+            setsession1(){
+                this.$http.post('/admin/goods/setsession','uname=admin&upwd=123456')
+                .then(res=>{
+                    console.log(res.data);
+                });
+            },
+            getsession(){
+                 this.$http.get('/admin/goods/getvcode')
+                .then(res=>{
+                    console.log(res.data);
+                });
+            },
+             getsession1(){
+                 this.$http.get('/admin/account/vcode')
+                .then(res=>{
+                    console.log(res.data);
+                });
+            },
             toggle() {
                 this.isCollapse = !this.isCollapse;
                 //isCollapse=true表示折叠菜单

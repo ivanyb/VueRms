@@ -87,7 +87,7 @@ var router = new vueRouter({
 	routes:[
 		// {path:'/login',component:login}, 
 		// {path:'/register',component:register}
-		{name:'login',path:'/admin/login',component:login},  //登录组件
+		{name:'login',path:'/admin/login',component:login,meta:{nologin:true}},  //登录组件
 		{path:'/',redirect:'/admin'},
 		{
 			path:'/admin',
@@ -156,7 +156,19 @@ router.beforeEach((to, from, next) => {
 		// console.log(store.state.global.menuActiveNo);
 	}
 
-	next();
+	// 检查登录
+	if(!to.meta.nologin){//如果路由元数据中没有设置nologin:true则表示要检查登录
+		axios.get('/admin/account/islogin').then(res=>{		
+			if(res.data.code =='nologin'){				
+				router.push({name:'login'});				
+			}
+			if(res.data.code =='logined'){
+				 next();
+			}
+		});
+	}else{
+		next();
+	}
 });
 
 // 全局过滤器

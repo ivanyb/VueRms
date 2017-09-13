@@ -9,7 +9,7 @@
 
 ```
 	
-## 二、upldate 版本
+## 二、update 版本
 
 - v2 elementUI的样式使用的是statics文件夹中的样式再配合site.css来实现最终效果
 - v4 利用elementUI实现静态页面布局和登录布局
@@ -62,7 +62,9 @@
   </el-row>
 
     说明：
-    安装完easyscroll之后，在组件中直接引用EasyScrollbar组件就行，产生滚动条的内容作为EasyScroll的$slot插入到滚动条组件中，注意插入到滚动条组件中内容 需要一个外层的包裹，即上面代码中的#wrapper div，其内部才是真正动态的内容。
+    安装完easyscroll之后，在组件中直接引用EasyScrollbar组件就行，
+    产生滚动条的内容作为EasyScroll的$slot插入到滚动条组件中，
+    注意插入到滚动条组件中内容 需要一个外层的包裹，即上面代码中的#wrapper div，其内部才是真正动态的内容。
 
     配置参数：
     滚动条的主要参数：
@@ -97,6 +99,16 @@
         </script>    
 
     ```
+- v13 实现登录功能和登录检查功能
+
+    ```
+
+        1、登录成功以后向session中写入一个cookie带回到浏览器，并且设置path=/admin/，表示只有将来浏览器在请求api服务器admin路径下的所有api才将cookie发送给服务器，将来可以通过设置path=/site/来达到前台的登录cookie和管理页面的cookie不是同一个，区分管理系统的登录session管理和前台用户登录的session管理
+
+        2、通过在 routes/accountRoute.js文件中定义一个 /account/islogin 来检测当前用户是否登录失效
+           在vue项目中的main.js中的路由钩子函数中如果当前跳转需要登录验证，利用axios请求 /admin/account/islogin，如果返回的是 {"code":"logined"}表示session有效，如果返回是{"coee":"nologin"}表示登录失效，跳转到登录页面重新登录
+
+    ``` 
 
 ## 三、填坑
 

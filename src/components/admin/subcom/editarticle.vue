@@ -163,7 +163,7 @@
             onSubmit(formName) {
                  this.$refs[formName].validate((valid) => {
                 if (valid) {
-                    var url = this.dataAPI+'/article/edit/'+this.tablename+'/'+this.artid;
+                    var url = '/admin/article/edit/'+this.tablename+'/'+this.artid;
                     this.$http.post(url,this.form)
                     .then((res)=> {
                         if(res.data.status == 1){
@@ -222,12 +222,12 @@
                 console.log('editor ready!', editor)
             },
             getcategorylist(){
-                var url = this.dataAPI+'/article/getcategorylist/'+this.tablename;
+                var url = '/admin/article/getcategorylist/'+this.tablename;
                 this.$http.get(url).then(res=>{
                   this.categorylist = res.data.message;
 
                     // 获取编辑老数据对象
-                    var artUrl = this.dataAPI+'/article/getarticle/'+this.tablename+'/'+this.artid;
+                    var artUrl = '/admin/article/getarticle/'+this.tablename+'/'+this.artid;
                     this.$http.get(artUrl).then(res=>{                      
                         this.form = res.data.message;
                         console.log(this.form);
