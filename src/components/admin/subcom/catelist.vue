@@ -24,7 +24,7 @@
         <!--3.0 列表区域-->
         <el-row>
             <el-table ref="multipleTable" :data="tableData3" border tooltip-effect="dark" 
-            style="width: 100%" @selection-change="handleSelectionChange"
+            style="width: 100%"  height="450" @selection-change="handleSelectionChange"
              v-loading="loading"
              element-loading-text="拼命加载中">
                 <el-table-column  type="selection" width="70">

@@ -64,6 +64,14 @@ import downcatelist from './components/admin/down/categorylist.vue';
 import downcateadd from './components/admin/down/categoryadd.vue';
 import downcateedit from './components/admin/down/categoryedit.vue';
 
+// 购物商城
+import goodslist from './components/admin/goods/goodslist.vue';
+import goodsadd from './components/admin/goods/goodsadd.vue';
+import goodsedit from './components/admin/goods/goodsedit.vue';
+
+import goodscatelist from './components/admin/goods/goodscatelist.vue';
+import goodscateadd from './components/admin/goods/categoryadd.vue';
+import goodscateedit from './components/admin/goods/categoryedit.vue';
 
 // 3.0 将vue-router集成到这个项目中来
 import vueRouter from 'vue-router';
@@ -84,7 +92,7 @@ var router = new vueRouter({
 			path:'/admin',
 			component:alayout,
 			children:[
-				//学员问题汇总-内容管理
+				// //学员问题汇总-内容管理
 				{name:'questionarticlelist',path:'questionarticlelist/',component:questionarticlelist, meta: { menuno:'1-1'}},  //TODO:注意 articlelist/ 后面写上 / 才生效
 				{name:'questionartadd',path:'questionartadd/',component:questionartadd, meta: { menuno:'1-1'}},
 				{name:'questionartedit',path:'questionartedit/:artid',component:questionartedit, meta: { menuno:'1-1'}},
@@ -93,7 +101,7 @@ var router = new vueRouter({
 				{name:'questioncateadd',path:'questioncateadd/:cateid?/:sortid?/:classlayer?',component:questioncateadd, meta: { menuno:'1-2'}},
 				{name:'questioncateedit',path:'questioncateedit/:cateid',component:questioncateedit, meta: { menuno:'1-2'}},
 		
-				//前端常用功能
+				// //前端常用功能-内容管理
 				{name:'commonarticlelist',path:'commonarticlelist/',component:commonarticlelist, meta: { menuno:'2-1'}},  //TODO:注意 articlelist/ 后面写上 / 才生效
 				{name:'commonartadd',path:'commonartadd/',component:commonartadd, meta: { menuno:'2-1'}},
 				{name:'commonartedit',path:'commonartedit/:artid',component:commonartedit, meta: { menuno:'2-1'}},
@@ -103,7 +111,7 @@ var router = new vueRouter({
 				{name:'commoncateadd',path:'commoncateadd/:cateid?/:sortid?/:classlayer?',component:commoncateadd, meta: { menuno:'2-2'}},
 				{name:'commoncateedit',path:'commoncateedit/:cateid',component:commoncateedit, meta: { menuno:'2-2'}},
 		
-				// //重难点专区
+				// //重难点专区-内容管理
 				{name:'pointarticlelist',path:'pointarticlelist/',component:pointarticlelist, meta: { menuno:'3-1'}},  //TODO:注意 articlelist/ 后面写上 / 才生效
 				{name:'pointartadd',path:'pointartadd/',component:pointartadd, meta: { menuno:'3-1'}},
 				{name:'pointartedit',path:'pointartedit/:artid',component:pointartedit, meta: { menuno:'3-1'}},
@@ -114,7 +122,7 @@ var router = new vueRouter({
 				{name:'pointcateedit',path:'pointcateedit/:cateid',component:pointcateedit, meta: { menuno:'3-2'}},
 		
 
-				// //资源下载
+				// //资源下载-内容管理
 				{name:'downarticlelist',path:'downarticlelist/',component:downarticlelist, meta: { menuno:'4-1'}},  //TODO:注意 articlelist/ 后面写上 / 才生效
 				{name:'downartadd',path:'downartadd/',component:downartadd, meta: { menuno:'4-1'}},
 				{name:'downartedit',path:'downartedit/:artid',component:downartedit, meta: { menuno:'4-1'}},
@@ -123,6 +131,16 @@ var router = new vueRouter({
 				{name:'downcateadd',path:'downcateadd/:cateid?/:sortid?/:classlayer?',component:downcateadd, meta: { menuno:'4-2'}},
 				{name:'downcateedit',path:'downcateedit/:cateid',component:downcateedit, meta: { menuno:'4-2'}},
 		
+				// 购物商城-内容管理
+				{name:'goodslist',path:'goodslist/',component:goodslist, meta: { menuno:'5-1'}},  //TODO:注意 articlelist/ 后面写上 / 才生效
+				{name:'goodsadd',path:'goodsadd/',component:goodsadd, meta: { menuno:'5-1'}},
+				{name:'goodsedit',path:'goodsedit/:artid',component:goodsedit, meta: { menuno:'5-1'}},
+
+				// 购物商城-类别管理
+				{name:'goodscatelist',path:'goodscatelist/',component:goodscatelist, meta: { menuno:'5-2'}},  
+				{name:'goodscateadd',path:'goodscateadd/:cateid?/:sortid?/:classlayer?',component:goodscateadd, meta: { menuno:'5-2'}},  
+				{name:'goodscateedit',path:'goodscateedit/:cateid',component:goodscateedit, meta: { menuno:'5-2'}},  
+				
 			]
 		}
 	]

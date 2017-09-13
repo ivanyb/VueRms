@@ -5,7 +5,7 @@
         <!--1.0 面包屑-->
         <div class="abread bt-line">
             <el-breadcrumb separator="/">
-                <el-breadcrumb-item>知识内容</el-breadcrumb-item>
+                <el-breadcrumb-item>购物商城</el-breadcrumb-item>
                 <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
                 <el-breadcrumb-item>内容管理</el-breadcrumb-item>
                 {{menuno}}
@@ -15,7 +15,7 @@
         <div class="operation">
             <el-row>
                 <el-col :span="20">
-                   <router-link v-bind="{to:'/admin/'+tablename+'artadd'}"> <el-button size="small" :plain="true" type="info" icon="plus">新增</el-button></router-link>
+                     <router-link to="/admin/goodsadd"> <el-button size="small" :plain="true" type="info" icon="plus">新增</el-button></router-link>
                     <el-button size="small" :plain="true" type="info" icon="check" @click="selectAll">全选</el-button>
                     <el-button size="small" :plain="true" type="info" icon="delete" @click="delselected">删除</el-button>
                 </el-col>
@@ -29,7 +29,7 @@
         <!--3.0 列表区域-->
         <el-row>
             <el-col :span="24">
-            <el-table ref="mtable" :data="tableData3" border tooltip-effect="dark"  height="400"
+            <el-table ref="mtable" :data="tableData3" border tooltip-effect="dark"  height="450"
              style="width: 100%" @selection-change="handleSelectionChange"
              v-loading="loading"
              element-loading-text="拼命加载中">
@@ -40,15 +40,24 @@
                 </el-table-column>-->
                 <el-table-column label="标题">                                                             
                     <template scope="scope">
-                    <router-link v-bind="{to:'/admin/'+tablename+'artedit/'+scope.row.id}" class="listedit"> {{scope.row.title}}
+                    <el-tooltip class="item" :open-delay="opendelay" effect="dark"
+                    placement="right">
+                    <div class="goodstip" slot="content">商品货号：{{scope.row.goods_no}}<br/>交易积分：{{scope.row.point}}
+                    <br/>图片：<br/>
+                    <img width="180" height="150" v-bind="{src:dataAPI+scope.row.img_url}"></div>
+                    <router-link v-bind="{to:'/admin/goodsedit/'+scope.row.id}" class="listedit"> {{scope.row.title}}
                     </router-link>
+                     </el-tooltip>
                     </template>
                 </el-table-column>
                 <el-table-column prop="categoryname" label="所属类别" width="150">
                 </el-table-column>
-                 <el-table-column label="发布时间/人" width="190">
-                  <template scope="scope">{{ scope.row.add_time | datefmt('YYYY-MM-DD') }}/{{scope.row.user_name}}</template>
-                </el-table-column>
+                 <el-table-column label="库存" width="90" prop="stock_quantity">
+                 </el-table-column>
+                  <el-table-column label="市场价" width="90" prop="market_price">
+                 </el-table-column>
+                  <el-table-column label="销售价" width="90" prop="sell_price">
+                 </el-table-column>
                  <el-table-column label="属性" width="170">
                   <template scope="scope">
                      
@@ -65,7 +74,7 @@
                 </el-table-column> 
                  <el-table-column label="操作" width="80">
                   <template scope="scope">
-                      <router-link v-bind="{to:'/admin/'+tablename+'artedit/'+scope.row.id}" class="listedit">修改</router-link>                                         
+                      <router-link v-bind="{to:'/admin/goodsedit/'+scope.row.id}" class="listedit">修改</router-link>                                         
                   </template>
                 </el-table-column> 
             </el-table>
@@ -84,7 +93,9 @@
 <script>
     export default {
         data() {
-            return {            
+            return {    
+                opendelay:500,    
+                tablename:'goods',    
                 loading:false, //加载中图标控制
                 isSelectAll:false, //全选和反选择   
                 pageSize:10,
@@ -108,12 +119,11 @@
                 searchval:'',
                 currentPage4: 1
             }
-        },
-        props:['tablename'],
+        },      
         methods: {
             getlist(){
                 this.loading = true;
-                this.$http.get(`/article/getlist/${this.tablename}?pageIndex=${this.pageIndex}&pageSize=${this.pageSize}`)
+                this.$http.get(`/goods/getlist?pageIndex=${this.pageIndex}&pageSize=${this.pageSize}`)
                 .then(res=>{
                     this.loading = false;
                     this.tableData3 = res.data.message;
@@ -193,7 +203,7 @@
                     ids+=this.selectedlist[i].id+splitChar;
                 }
 
-                let url = this.dataAPI+'/article/del/'+this.tablename+'/'+ids;
+                let url = this.dataAPI+'/goods/del/'+ids;
                 this.$http.get(url).then(res=>{
                     if(res.data.status ==1){
                         this.$message({
@@ -247,6 +257,9 @@
 </script>
 
 <style class="scoped">
+    .goodstip{
+        padding: 3px;
+    }
     .abread {
         padding: 10px;
     }

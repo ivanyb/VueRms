@@ -58,6 +58,18 @@
                                 <el-menu-item index="4-3"><i class="el-icon-document"></i>评论管理</el-menu-item>
                             </el-menu-item-group>
                         </el-submenu>
+                        <!--购物商城-->
+                        <el-submenu index="5">
+                            <template slot="title">
+                                <i class="el-icon-message"></i>
+                                <span slot="title">购物商城</span>
+                            </template>
+                            <el-menu-item-group>
+                               <router-link to="/admin/goodslist"><el-menu-item index="5-1"> <i class="el-icon-document"></i>内容管理</el-menu-item></router-link>
+                               <router-link to="/admin/goodscatelist"><el-menu-item index="5-2"><i class="el-icon-document"></i>类别管理</el-menu-item></router-link>
+                                <el-menu-item index="5-3"><i class="el-icon-document"></i>评论管理</el-menu-item>
+                            </el-menu-item-group>
+                        </el-submenu>
                     </el-menu>
                 </div>
             </el-col>
