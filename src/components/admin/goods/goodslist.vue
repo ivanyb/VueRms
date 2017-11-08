@@ -1,6 +1,6 @@
 <template>
     <div class="arttmpl">
-        {{baseURL1}}<br />
+        <!--{{baseURL1}}<br />-->
         
         <!--1.0 面包屑-->
         <div class="abread bt-line">
@@ -8,7 +8,7 @@
                 <el-breadcrumb-item>购物商城</el-breadcrumb-item>
                 <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
                 <el-breadcrumb-item>内容管理</el-breadcrumb-item>
-                {{menuno}}
+                <!--{{menuno}}-->
             </el-breadcrumb>
         </div>
         <!--2.0 操作区域-->
@@ -169,7 +169,7 @@
                     classattr = classattr.replace('imgactive','');
                 }else{
                      classattr+=' imgactive'
-                }              
+                }
                 e.currentTarget.setAttribute('class',classattr);
             },
             //全选和反选
@@ -186,7 +186,7 @@
                 }                
             },
             handleSelectionChange(val) {
-                // console.log(val);
+                console.log(val);
                 this.selectedlist = val;
                 //  console.log(this.multipleSelection);
             },

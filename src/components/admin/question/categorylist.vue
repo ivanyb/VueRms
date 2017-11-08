@@ -1,6 +1,8 @@
 <template>
-
-<list tablename="question"></list>
+<div class="catelist">
+    <a href="#">quest a</a>
+    <list tablename="question"></list>
+</div>
 </template>
 
 <script>
@@ -21,5 +23,7 @@
 </script>
 
 <style scoped>
-    
+  .catelist a{
+      color:orange;
+  }
 </style>

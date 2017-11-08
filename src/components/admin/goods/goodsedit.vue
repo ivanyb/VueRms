@@ -76,7 +76,9 @@
                            </el-col>
                            <el-col :span="9">
                                 <el-form-item label="上传附件">
-                                <EasyScrollbar :barOption="opt">
+                                   
+                                <!--<EasyScrollbar :barOption="opt">-->
+                           
                                 <div  id="wrapper" style="max-height: 200px;">                                
                                     <el-upload
                                         class="upload-demo"
@@ -89,8 +91,8 @@
                                         <!--<div slot="tip" class="el-upload__tip">不超过100MB</div>-->
                                     </el-upload>                                    
                                
-                                    </div>
-                                 </EasyScrollbar>
+                                    </div>                              
+                                 <!--</EasyScrollbar>-->                                
                                   </el-form-item>
                            </el-col>
                        </el-row>
@@ -145,12 +147,12 @@
     // 导入富文本编辑器
     import { quillEditor } from 'vue-quill-editor';
     import kits  from '../../../kits/kits.js';
+    
 
     export default {
-         components: {
-            quillEditor
-        },
-        
+         components:{
+             quillEditor
+         },
         data() {
             return {
                 tablename:'goods',
@@ -297,6 +299,11 @@
 </script>
 
 <style>   
+
+/*The Content*/
+.scroll-me{
+  min-width: 750px;
+}
     .arttmpl .operation {
         border: 1px solid rgba(0, 0, 0, 0.1);
         padding: 10px;

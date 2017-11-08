@@ -210,7 +210,7 @@
             //上传附件
             uploadFilesuccess(response, file, fileList){
                 this.form.fileList.push(response);
-                console.log(this.form.fileList);  
+                console.log(this.form.fileList);
 
             },
             fileRemove(file, fileList){
@@ -251,14 +251,15 @@
         margin: 15px 0 0 0;
         border-radius: 10px;
     }
-
-    .html.ql-editor{
-        margin-top:1px; 
+    
+    .html.ql-editor {
+        margin-top: 1px;
         border: 1px solid rgba(0, 0, 0, 0.1);
     }
-  .ql-container .ql-editor {
-    min-height: 20em;
-    padding-bottom: 1em;
-    max-height: 25em;
-  }
+    
+    .ql-container .ql-editor {
+        min-height: 20em;
+        padding-bottom: 1em;
+        max-height: 25em;
+    }
 </style>

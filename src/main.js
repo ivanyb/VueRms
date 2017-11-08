@@ -4,9 +4,11 @@ import Vue from 'vue';
 // 导入axios来替代vue-resource进行ajax请求
 import axios from 'axios';
 // 全局请求的基本url
-Vue.prototype.dataAPI = axios.defaults.baseURL = 'http://127.0.0.1:8899';
+// Vue.prototype.dataAPI = axios.defaults.baseURL = 'http://127.0.0.1:8899';
+// Vue.prototype.dataAPI = axios.defaults.baseURL = 'http://139.199.192.48:6060';
+Vue.prototype.dataAPI = axios.defaults.baseURL = 'http://157.122.54.189:9095';
 //post请求内容类型
-axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+// axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
 // withCredentials配置为true表示在ajax请求中携带cookie信息，默认是false
 axios.defaults.withCredentials=true;
@@ -14,12 +16,12 @@ axios.defaults.withCredentials=true;
 Vue.prototype.$http = axios;
 // 导入elementui
 import ElementUI from 'element-ui';
-import '../statics/theme_rms/index.css';
+// import '../statics/theme_rms/index.css';
 Vue.use(ElementUI); 
 
 // 美观的滚动条组件
-import EasyScroll from 'easyscroll';
-Vue.use(EasyScroll);
+// import EasyScroll from 'easyscroll';
+// Vue.use(EasyScroll);
 
 // 2.0 导入App.vue的vue对象
 import App from './App.vue'; 
@@ -73,6 +75,14 @@ import goodsedit from './components/admin/goods/goodsedit.vue';
 import goodscatelist from './components/admin/goods/goodscatelist.vue';
 import goodscateadd from './components/admin/goods/categoryadd.vue';
 import goodscateedit from './components/admin/goods/categoryedit.vue';
+
+
+// 订单管理
+import orderlist from './components/admin/order/orderlist.vue';
+import orderedit from './components/admin/order/orderedit.vue';
+
+// 网站前台
+// import slayout from './components/site/slayout.vue';
 
 // 3.0 将vue-router集成到这个项目中来
 import vueRouter from 'vue-router';
@@ -142,8 +152,12 @@ var router = new vueRouter({
 				{name:'goodscateadd',path:'goodscateadd/:cateid?/:sortid?/:classlayer?',component:goodscateadd, meta: { menuno:'5-2'}},  
 				{name:'goodscateedit',path:'goodscateedit/:cateid',component:goodscateedit, meta: { menuno:'5-2'}},  
 				
+				// 订单管理
+				{name:'orderlist',path:'orderlist/',component:orderlist, meta: { menuno:'6-1'}}, 
+				{name:'orderedit',path:'orderedit/:orderid',component:orderedit, meta: { menuno:'6-1'}},   
 			]
-		}
+		},
+		// {name:'slayout',path:'/site',component:slayout}
 	]
 	});
 
@@ -155,7 +169,7 @@ router.beforeEach((to, from, next) => {
 		 store.dispatch(store.state.global.ChangeMenuActiveNoFlag,to.meta.menuno);
 		// console.log(store.state.global.menuActiveNo);
 	}
-
+	
 	// 检查登录
 	if(!to.meta.nologin){//如果路由元数据中没有设置nologin:true则表示要检查登录
 		axios.get('/admin/account/islogin').then(res=>{		
@@ -172,10 +186,39 @@ router.beforeEach((to, from, next) => {
 });
 
 // 全局过滤器
-import moment from 'moment';
+// import moment from 'moment';
 Vue.filter('datefmt',(input,fmtstring)=>{
-	return moment(input).format(fmtstring);
+	// return moment(input).format(fmtstring);
+	return fmtdate(input,fmtstring);
 });
+
+
+// 格式化日期
+function fmtdate(input, fmtstring) {
+	var now = new Date(input);
+	var y = now.getFullYear();
+	var m = now.getMonth() + 1;
+	m = m < 10 ? '0' + m : m;
+	var d = now.getDate();
+	d = d < 10 ? '0' + d : d;
+	var h = now.getHours();
+	var mm = now.getMinutes();
+	var sec = now.getSeconds();
+
+	var res = y + '-' + m + '-' + d;
+
+	switch (fmtstring) {
+		case 'YYYY-MM-DD':
+			res = y + '-' + m + '-' + d;
+			break;
+
+		case 'YYYY-MM-DD HH:MM:ss':
+			res = y + '-' + m + '-' + d + ' ' + h + ':' + mm + ':' + sec;
+			break;
+	}
+	return res;
+
+}
 
 // 4.0 注册mint-ui
 // 导入mint-ui的css文件
@@ -187,7 +230,7 @@ Vue.filter('datefmt',(input,fmtstring)=>{
 
 // 5.0 注册mui的css样式
 // import '../statics/mui/css/mui.css';
-import '../statics/css/site.css';
+// import '../statics/css/site.css';
 
 // 5.0 利用Vue对象进行解析渲染
 new Vue({

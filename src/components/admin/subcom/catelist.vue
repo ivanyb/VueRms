@@ -1,13 +1,13 @@
 <template>
     <div class="arttmpl">
-        {{this.tablename}}
+        <!--{{this.tablename}}-->
         <!--1.0 面包屑-->
         <div class="abread bt-line">
             <el-breadcrumb separator="/">
                 <el-breadcrumb-item>知识内容</el-breadcrumb-item>
                 <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
                 <el-breadcrumb-item>类别管理</el-breadcrumb-item>
-                {{menuno}}
+                <!--{{menuno}}-->
             </el-breadcrumb>
         </div>
         <!--2.0 操作区域-->
@@ -111,8 +111,19 @@
 
 </script>
 
-<style class="scoped">
+<style>
     .abread {
-        padding: 10px;
+        padding: 10px;       
     }
+
+  
+    .arttmpl[data-v-77c2a3c4] .el-table th > .cell{
+        color: green;
+    }
+
+    .arttmpl[data-v-f963c2a8] .el-table th > .cell{
+        color: red;
+    }
+  
+   
 </style>

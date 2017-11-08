@@ -22,5 +22,5 @@
 </script>
 
 <style scoped>
-    
+
 </style>

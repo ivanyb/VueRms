@@ -1,6 +1,9 @@
 <template>
 
-<list tablename="point"></list>
+<div class="catelist">
+        <a href="#">point a</a>
+    <list tablename="point"></list>
+</div>
 </template>
 
 <script>
@@ -21,5 +24,7 @@
 </script>
 
 <style scoped>
-    
+    .catelist a{
+      color: greenyellow;
+  }
 </style>

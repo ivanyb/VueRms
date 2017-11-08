@@ -1,4 +1,23 @@
-﻿## 一、运行这个项目的步骤：
+﻿
+# 在线访问
+
+[点击在线访问][]  
+ 用户名：admin   密码:123456
+
+#网站特殊文件夹说明：
+
+```
+    网站的管理系统页面和前端展示页面是放在一个项目中，所以
+    components中的admin文件夹中的所有文件均为管理系统的页面
+    components中的site文件夹中的所有文件均为前端展示系统的页面
+
+    statics/site文件夹下的所有内容均为前端展示系统的页面
+    statics/css下的文件均为管理系统的样式控制
+    theme_rms，imgs,mui均可以为共用
+
+```
+
+## 一、运行这个项目的步骤：
 - 先在这个文件夹中打开cmd面板，输入  npm install 
 - 在cmd面板中执行 npm run dev
 
@@ -109,6 +128,36 @@
            在vue项目中的main.js中的路由钩子函数中如果当前跳转需要登录验证，利用axios请求 /admin/account/islogin，如果返回的是 {"code":"logined"}表示session有效，如果返回是{"coee":"nologin"}表示登录失效，跳转到登录页面重新登录
 
     ``` 
+- v14 关于vue组件中的<style scoped>研究
+
+    ```
+        把elementUI和site.css从main.js到的导入，移到了 /admin/layout.vue中的style中
+          @import '../../../statics/theme_rms/index.css';
+         @import '../../../statics/css/site.css';
+
+        关于vue组件中的<style scoped>在通过vue-route加载组件和
+        通过export default {component:list}加载组件样式作用节点注意点测试
+
+        测试文件：
+        1、vue-route加载组件测试文件：
+        components/admin/question/categorylist.vue 
+        和 components/admin/point/categorylist.vue 中对于a标签颜色的控制测试，
+        效果：
+         1、访问question/categorylist.vue  时a标签颜色为 orange;
+         2、访问point/categorylist.vue  时a标签颜色为 greenyellow;
+
+
+        2、通过export default {component:list}加载组件测试文件：
+           components/admin/question/categorylist.vue 
+           components/admin/point/categorylist.vue
+           components/admin/subcom/catelist.vue
+           效果：
+            1、访问question/categorylist.vue  时表头文字颜色为 red;
+            2、访问point/categorylist.vue  时表头文字颜色为 yellow;
+
+    ```
+
+    - v16 完成订单列表和订单修改功能
 
 ## 三、填坑
 
@@ -125,4 +174,32 @@
 
     4、elementUI中的select下拉组件中的 :value一定是字符串，如果是整数不会生效，做编辑的时候加载老数据时也不能自动选中 
 
+    5、关于vue组件中的 <style scoped>中的scoped作用问题：
+        1、当前 a.vue组件页面是通过vue-router加载进来的，那么在a.vue组件中的<style scoped>中编写的样式只作用于当前组件的节点，其他组件的相同节点不会被这个css作用，但是这些样式不会作用于 在a.vue中通过 export default{ components:{  list }} 注册的子组件list中的所有节点，用下面第二步可以解决问题
+
+        2、在a.vue和b.vue中通过 export default{ components:{  list }} 注册了一个 list.vue组件，想要访问a.vue
+        时list.vue中的a标签颜色分别为red,访问和b.vue时list.vue中的a标签颜色分别为green，实现方案如下：
+            1、在a.vue和b.vue中定义一个<style scoped>一定要带有scoped,这样不同页面生成的data- 标识是不一样的保证样式只作用域当前组件的节点，这里假设 a.vue中生成的是 data-xxx, b.vue中生成的是 data-vvv
+            <style scoped>             
+            
+            </style>
+
+            2、在list.vue中的<template>中定义一个class为tmpl的div，并且定义一个不带有scoped的<style> ,一定不能写成 
+            <template>
+             <div class="tmpl"> <a href="#">不同颜色控制</a></div>
+            </template>
+            <style scoped>
+            <style>
+                .tmpl[data-xxx] a{
+                    color:red; /*这个样式主要控制访问a.vue时a标签的颜色*/
+                }
+                .tmpl[data-vvv] a{
+                    color:green;/*这个样式主要控制访问b.vue时a标签的颜色*/
+                }
+                
+            </style>
+
+
 ```
+
+[点击在线访问]: http://157.122.54.189:9092/admin/#/admin/login "点击在线访问"

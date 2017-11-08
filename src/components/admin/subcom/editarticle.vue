@@ -241,7 +241,6 @@
             // 获取类别数据
             this.getcategorylist();
         }
-
     }
 
 </script>

@@ -2,7 +2,7 @@
     <div class="accounttmpl">
         <el-row>
             <el-col :offset="6">
-                <img src="/statics/imgs/logo.png" alt="">
+                <img src="../../../../statics/imgs/logo.png" alt="">
             </el-col>
         </el-row>
         <div class="form">
@@ -23,14 +23,13 @@
                     <el-button type="primary" @click="submitForm('ruleForm2')">提交</el-button>
                     <el-button @click="resetForm('ruleForm2')">重置</el-button>
 
-                </el-form-item>
+           </el-form-item>
             </el-form>
         </div>
     </div>
 </template>
 
 <script>
-
     export default {
         data() {
             //    var validateUname = (rule, value, callback) => {                   
@@ -76,9 +75,9 @@
             submitForm(formName) {                
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        //验证通过以后，触发请求                                      
+                        //验证通过以后，触发请求     // , 'uname='+this.ruleForm2.uname+'&upwd='+this.ruleForm2.upwd)                                  
                         this.$http.post('/admin/account/login'
-                            , 'uname='+this.ruleForm2.uname+'&upwd='+this.ruleForm2.upwd)
+                        ,this.ruleForm2)                           
                             .then((res)=> {
                                 this.$notify({title: '成功',message: res.data.uname,duration:300,
                                  type: 'success',onClose:()=>{
@@ -89,7 +88,6 @@
 
                             }).catch((err)=> {
                              this.$notify.error({ title: '异常',message: err.message});
-                                
                             });
                     } else {
                         console.log('error submit!!');
@@ -114,14 +112,13 @@
         width: 350px;
         margin: 50px auto;
     }
-
+    
     .form {
-
         padding: 10px;
         border: 1px solid rgba(255, 255, 255, 0.2);
         border-radius: 10px;
     }
-
+    
     .wcolor {
         color: #ffffff;
     }
